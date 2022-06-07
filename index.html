@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html lang="ge">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
 
     <title> Tic-Tac-Toe </title>
 
@@ -14,11 +14,14 @@
         }
     </style>
     <script>
+        var current = 0,
+            players = ["x", "o"];
         document.addEventListener("DOMContentLoaded", function () {
 
             function TicTacToe(element) {
                 var current = 0,
                     players = ["x", "o"],
+
                     field = document.createElement("table"),
                     caption = document.createElement("caption"),
                     labels = [
@@ -36,7 +39,7 @@
                         "select": "wählen",
                         "new game?": "Neues Spiel?"
                     }
-                    finished, games, b, c, i, r, tr;
+                finished, games, b, c, i, r, tr;
 
                 function check() {
                     var tds = field.getElementsByTagName("td"),
@@ -199,8 +202,7 @@
                     if (!finished
                         && td.tagName.toLowerCase() == "td"
                         && td.className.length < 1
-                    )
-                    {
+                    ) {
 
                         td.className = players[current]; // Klassennamen vergeben
                         td.innerHTML = players[current];
@@ -266,23 +268,59 @@
             }
         });
 
+        function buttongeklickt(element) {
+            if(current === 0)
+            {
+                element.setAttribute("class", "spieler1" )
+            }
+            else {
+                element.setAttribute("class", "spieler2" )
+            }
+            current = 1 - current;
+        }
+
+
     </script>
 <body>
-<h1>  Tic Tac Toe  </h1>
+<h1> Tic Tac Toe </h1>
+<div class="spielfeld">
 <table>
     <tr>
         <td>
-
+            <button type="button" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            testtest
+            <button type="button" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            testtesttest
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
         </td>
     </tr>
 </table>
+</div>
 </body>
-              </head>
-            </html>
+</head>
+</html>
 
