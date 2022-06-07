@@ -277,45 +277,82 @@
                 element.setAttribute("class", "spieler2" )
             }
             current = 1 - current;
+            element.setAttribute("disabled","true")
         }
+        function wergewinnt(element)
+        {
+            var b1c = document.querySelector('#1').getAttribute('class');
+            var b2c = document.querySelector('#2').getAttribute('class');
+            var b3c = document.querySelector('#3').getAttribute('class');
+            var b4c = document.querySelector('#4').getAttribute('class');
+            var b5c = document.querySelector('#5').getAttribute('class');
+            var b6c = document.querySelector('#6').getAttribute('class');
+            var b7c = document.querySelector('#7').getAttribute('class');
+            var b8c = document.querySelector('#8').getAttribute('class');
+            var b9c = document.querySelector('#9').getAttribute('class');
 
+            document.querySelector('#1').getAttribute('class') === 'spieler1'
+            document.querySelector('#1').getAttribute('class') === 'spieler2'
+            document.querySelector('#2').getAttribute('class') === 'spieler1'
+            document.querySelector('#2').getAttribute('class') === 'spieler2'
+            document.querySelector('#3').getAttribute('class') === 'spieler1'
+            document.querySelector('#3').getAttribute('class') === 'spieler2'
+            document.querySelector('#4').getAttribute('class') === 'spieler1'
+            document.querySelector('#4').getAttribute('class') === 'spieler2'
+            document.querySelector('#5').getAttribute('class') === 'spieler1'
+            document.querySelector('#5').getAttribute('class') === 'spieler2'
+            document.querySelector('#6').getAttribute('class') === 'spieler1'
+            document.querySelector('#6').getAttribute('class') === 'spieler2'
+            document.querySelector('#7').getAttribute('class') === 'spieler1'
+            document.querySelector('#7').getAttribute('class') === 'spieler2'
+            document.querySelector('#8').getAttribute('class') === 'spieler1'
+            document.querySelector('#8').getAttribute('class') === 'spieler2'
+            document.querySelector('#9').getAttribute('class') === 'spieler1'
+            document.querySelector('#9').getAttribute('class') === 'spieler2'
+
+
+            if(b1c === 'spieler1' && b2c === 'spieler1' && b3c === 'spieler1')
+            {
+                message = ("Spieler1 gewinnt!")
+            }
+            }
 
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
 <div class="spielfeld">
-<table>
+    <table>
     <tr>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="1" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="2" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="3" onclick="buttongeklickt(this)"></button>
         </td>
     </tr>
     <tr>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="4" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="5" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="6" onclick="buttongeklickt(this)"></button>
         </td>
     </tr>
     <tr>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="7" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="8" onclick="buttongeklickt(this)"></button>
         </td>
         <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
+            <button type="button" id="9" onclick="buttongeklickt(this)"></button>
         </td>
     </tr>
 </table>
