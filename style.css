@@ -10,12 +10,12 @@
     border: 2px solid black ;
 }
 
-.spieler1
+.spieler0
 {
     background-color: green;
 }
 
-.spieler2
+.spieler1
 {
     background-color: red;
 }
@@ -37,4 +37,9 @@
     background-color: #f44336; /* Red */
     color: white;
     margin-bottom: 15px;
+}
+
+.Infos {
+    font-style: italic;
+
 }
