@@ -24,6 +24,8 @@
             element.setAttribute("disabled", "true")
         }
 
+        fu
+
         function wergewinnt() {
             var b1c = document.querySelector('#b1').getAttribute('class');
             var b2c = document.querySelector('#b2').getAttribute('class');
@@ -38,13 +40,6 @@
             var allebuttons = document.querySelectorAll("button")
 
             var cAs = "spieler" + current
-
-
-
-        function Gewinneranzeige() {
-            alert("Spieler " + current + " gewinnt!");
-
-            }
 
 
             if (b1c === cAs && b2c === cAs && b3c === cAs) {
@@ -86,6 +81,11 @@
                 Gewinneranzeige();
 
             }
+
+        }
+
+        function Gewinneranzeige() {
+            alert("Spieler " + current + " gewinnt!");
 
         }
 
