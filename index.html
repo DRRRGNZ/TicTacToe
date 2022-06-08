@@ -11,6 +11,17 @@
         var current = 0,
             players = ["x", "o"];
 
+        var gewinnBedingungen = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+
         function buttongeklickt(element) {
             if (current === 0) {
                 element.setAttribute("class", "spieler0")
@@ -25,62 +36,27 @@
         }
 
         function wergewinnt() {
-            var b1c = document.querySelector('#b1').getAttribute('class');
-            var b2c = document.querySelector('#b2').getAttribute('class');
-            var b3c = document.querySelector('#b3').getAttribute('class');
-            var b4c = document.querySelector('#b4').getAttribute('class');
-            var b5c = document.querySelector('#b5').getAttribute('class');
-            var b6c = document.querySelector('#b6').getAttribute('class');
-            var b7c = document.querySelector('#b7').getAttribute('class');
-            var b8c = document.querySelector('#b8').getAttribute('class');
-            var b9c = document.querySelector('#b9').getAttribute('class');
+
+            var allebuttons = document.querySelectorAll('button')
 
             var cAs = "spieler" + current
 
+            for (k = 0; k < 8; k++) {
 
-            if (b1c === cAs && b2c === cAs && b3c === cAs) {
-                spielende();
+                if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === cAs
+                    && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === cAs
+                    && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === cAs) {
+
+                    spielende();
+                }
             }
-
-            if (b4c === cAs && b5c === cAs && b6c === cAs) {
-                spielende();
-            }
-
-            if (b7c === cAs && b8c === cAs && b9c === cAs) {
-                spielende();
-            }
-
-            if (b1c === cAs && b4c === cAs && b7c === cAs) {
-                spielende();
-            }
-
-            if (b2c === cAs && b5c === cAs && b8c === cAs) {
-                spielende();
-            }
-
-            if (b3c === cAs && b6c === cAs && b9c === cAs) {
-                spielende();
-            }
-
-            if (b1c === cAs && b5c === cAs && b9c === cAs) {
-                spielende();
-            }
-
-            if (b3c === cAs && b5c === cAs && b7c === cAs) {
-                spielende();
-            }
-
-
 
         }
 
-
-        function spielende()
-        {
+        function spielende() {
             var allebuttons = document.querySelectorAll("button")
 
-            for (var i = 0;i < 9;i++)
-            {
+            for (var i = 0; i < 9; i++) {
                 allebuttons[i].setAttribute('disabled', 'true');
             }
 
@@ -95,46 +71,47 @@
 <body>
 <h1> Tic Tac Toe </h1>
 <div class="Infos">
-<h2> Regeln: </h2>
+    <h2> Regeln: </h2>
 
-<p> 2 Spieler werden benötigt um dieses Spiel zu spielen!</p>
-<p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder Horizontal) mit seiner Form belegt hat, hat gewonnen!</p>
-<p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
-<p> Es wird immer nach einander gezogen!</p>
+    <p> 2 Spieler werden benötigt um dieses Spiel zu spielen!</p>
+    <p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder Horizontal) mit seiner Form belegt hat, hat
+        gewonnen!</p>
+    <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
+    <p> Es wird immer nach einander gezogen!</p>
 </div>
 <div class="spielfeld">
     <table>
         <tr>
             <td>
-                <button type="button" id="b1" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="0" onclick="buttongeklickt(this)"></button>
             </td>
             <td>
-                <button type="button" id="b2" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="1" onclick="buttongeklickt(this)"></button>
             </td>
             <td>
-                <button type="button" id="b3" onclick="buttongeklickt(this)"></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" id="b4" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" id="b5" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" id="b6" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="2" onclick="buttongeklickt(this)"></button>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="button" id="b7" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="3" onclick="buttongeklickt(this)"></button>
             </td>
             <td>
-                <button type="button" id="b8" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="4" onclick="buttongeklickt(this)"></button>
             </td>
             <td>
-                <button type="button" id="b9" onclick="buttongeklickt(this)"></button>
+                <button type="button" id="5" onclick="buttongeklickt(this)"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" id="6" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" id="7" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" id="8" onclick="buttongeklickt(this)"></button>
             </td>
         </tr>
     </table>
