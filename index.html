@@ -24,8 +24,6 @@
             element.setAttribute("disabled", "true")
         }
 
-        fu
-
         function wergewinnt() {
             var b1c = document.querySelector('#b1').getAttribute('class');
             var b2c = document.querySelector('#b2').getAttribute('class');
@@ -37,58 +35,61 @@
             var b8c = document.querySelector('#b8').getAttribute('class');
             var b9c = document.querySelector('#b9').getAttribute('class');
 
-            var allebuttons = document.querySelectorAll("button")
-
             var cAs = "spieler" + current
 
 
             if (b1c === cAs && b2c === cAs && b3c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b4c === cAs && b5c === cAs && b6c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b7c === cAs && b8c === cAs && b9c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b1c === cAs && b4c === cAs && b7c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b2c === cAs && b5c === cAs && b8c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b3c === cAs && b6c === cAs && b9c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b1c === cAs && b5c === cAs && b9c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
             if (b3c === cAs && b5c === cAs && b7c === cAs) {
-                Gewinneranzeige();
-
+                spielende();
             }
 
+
+
+        }
+
+
+        function spielende()
+        {
+            var allebuttons = document.querySelectorAll("button")
+
+            for (var i = 0;i < 9;i++)
+            {
+                allebuttons[i].setAttribute('disabled', 'true');
+            }
+
+            Gewinneranzeige();
         }
 
         function Gewinneranzeige() {
-            alert("Spieler " + current + " gewinnt!");
-
+            alert("Spieler " + current + " gewinnt!")
         }
-
 
     </script>
 <body>
@@ -142,4 +143,3 @@
 </body>
 </head>
 </html>
-
