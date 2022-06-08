@@ -14,8 +14,10 @@
         function buttongeklickt(element) {
             if (current === 0) {
                 element.setAttribute("class", "spieler0")
+                element.innerText = "X";
             } else {
                 element.setAttribute("class", "spieler1")
+                element.innerText = "O";
             }
             wergewinnt()
             current = 1 - current;

@@ -1,45 +1,32 @@
-.spielfeld table
-{
+.spielfeld table {
     border: 2px solid black;
     border-collapse: collapse;
 }
-.spielfeld td
-{
+
+.spielfeld td {
     width: 100px;
     height: 100px;
-    border: 2px solid black ;
+    border: 2px solid black;
 }
 
-.spieler0
-{
-    background-color: green;
+.spieler0 {
+    font-size: 100px;
+    line-height: 0.37;
+    color: black;
 }
 
-.spieler1
-{
-    background-color: red;
+.spieler1 {
+    font-size: 110px;
+    line-height: 0.05;
+    color: black;
 }
-.spielfeld button
-{
+
+.spielfeld button {
     width: 100px;
     height: 100px;
-}
-
-.alert {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    color: white;
-    margin-bottom: 15px;
-}
-
-.alert2 {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    color: white;
-    margin-bottom: 15px;
 }
 
 .Infos {
     font-style: italic;
-
 }
+
