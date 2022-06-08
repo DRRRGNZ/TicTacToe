@@ -66,6 +66,24 @@
             alert("Spieler " + current + " gewinnt!")
         }
 
+        function Spielfeldgenerieren() {
+            var tabelle = document.querySelector('table')
+
+            for (k = 0; k < 3; k++) {
+                var zeilenbruch = document.createElement('tr')
+                for (i = 0; i < 3; i++) {
+                    var button = document.createElement('button')
+                    button.addEventListener('click', () => {
+                        buttongeklickt(button);
+                    })
+                    var td = document.createElement('td')
+                    td.appendChild(button)
+                    zeilenbruch.appendChild(td)
+                }
+                tabelle.appendChild(zeilenbruch)
+            }
+        }
+
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
@@ -79,43 +97,47 @@
     <p> Es wird immer nach einander gezogen!</p>
 </div>
 <div class="spielfeld">
-    <table>
-        <tr>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-            <td>
-                <button type="button" onclick="buttongeklickt(this)"></button>
-            </td>
-        </tr>
-    </table>
+
 </div>
-<button type="button" onclick="location.reload()">Nächste Runde</button>
+<table class="spielfeld">
+
+</table>
+<button type="button" onclick="Spielfeldgenerieren()">Nächste Runde</button>
 </body>
 </head>
 </html>
+<table class="spielfeld">
+    <tr>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+        <td>
+            <button type="button" onclick="buttongeklickt(this)"></button>
+        </td>
+    </tr>
+</table>
