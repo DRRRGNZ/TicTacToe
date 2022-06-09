@@ -103,9 +103,10 @@
         }
 
         function kannKIGewinnen(spieler) {
+            var allebuttons = document.querySelectorAll('button')
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
-            for (var x = 0; x < 9; x++) {
+            for (var x = 0; x < 8; x++) {
                 if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
                     allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
                     allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
@@ -113,7 +114,7 @@
                     allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
                     allebuttons[gewinnBedingungen[x][2]].innerText = "O";
                     current = 1 - current
-                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
                     return true;
                 } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
                     allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
@@ -122,7 +123,7 @@
                     allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
                     allebuttons[gewinnBedingungen[x][1]].innerText = "O";
                     current = 1 - current
-                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
                     return true;
                 } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
                     allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
@@ -131,7 +132,7 @@
                     allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
                     allebuttons[gewinnBedingungen[x][0]].innerText = "O";
                     current = 1 - current
-                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
                     return true;
                 }
             }
