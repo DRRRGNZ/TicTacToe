@@ -93,26 +93,66 @@
 
         }
 
-        function gegenspieler()
-        {
+        function gegenspieler() {
+            // Sieg des Spielers vereiteln
+            if (kannKIGewinnen('spieler1') === false) {
+                if (kannKIGewinnen('spieler0') === false) {
+                    zufaelligesFeld()
+                }
+            }
+        }
+
+        function kannKIGewinnen(spieler) {
+            var s1 = "spieler" + 0
+            var s2 = "spieler" + 1
+            for (var x = 0; x < 9; x++) {
+                if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][2]].innerText = "O";
+                    current = 1 - current
+                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    return true;
+                } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][1]].innerText = "O";
+                    current = 1 - current
+                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    return true;
+                } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][0]].innerText = "O";
+                    current = 1 - current
+                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        function zufaelligesFeld() {
             var allebuttons = document.querySelectorAll('button')
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
             var zufaelligeZahl = Math.floor(Math.random() * 8)
-            if( allebuttons[zufaelligeZahl].getAttribute('class') === s1 || allebuttons[zufaelligeZahl].getAttribute('class') === s2 )
-            {
-              gegenspieler()
-            }
-            else
-            {
+            if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 || allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
+                zufaelligesFeld()
+            } else {
                 allebuttons[zufaelligeZahl].setAttribute("class", "spieler1")
                 allebuttons[zufaelligeZahl].innerText = "O";
-                current = 1- current
+                current = 1 - current
                 allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
             }
-
         }
-
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
