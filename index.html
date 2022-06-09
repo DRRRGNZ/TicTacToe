@@ -33,9 +33,10 @@
                 button.setAttribute("class", "spieler1")
                 button.innerText = "O";
             }
-            wergewinnt()
-            gegenspieler()  // 0
-            wergewinnt()
+            if (wergewinnt() !== true) {
+                gegenspieler()
+                wergewinnt()
+            }
             current = 1 - current// 1
             button.setAttribute("disabled", "true") // 1
 
@@ -48,48 +49,33 @@
             var cAs = "spieler" + current
 
             for (var k = 0; k < 8; k++) {
-
                 if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === cAs
                     && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === cAs
-                    && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === cAs)
-                {
+                    && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === cAs) {
                     spielende();
+                    return true;
                 }
+
             }
+            return unentschieden()
         }
+
         function unentschieden() {
+
             var allebuttons = document.querySelectorAll("button")
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
-
-           if(allebuttons[0].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2)
-           {
-               if(allebuttons[1].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-               {
-                   if(allebuttons[2].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                   {
-                       if(allebuttons[3].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                       {
-                           if(allebuttons[4].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                           {
-                               if(allebuttons[5].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                               {
-                                   if(allebuttons[6].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                                   {
-                                       if(allebuttons[7].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                                       {
-                                           if(allebuttons[8].getAttribute('class') === s1 || allebuttons[0].getAttribute('class') === s2 )
-                                           {
-                                               alert("Unentschieden")
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                   }
-               }
-           }
+            var unentschieden = true
+            for (var z = 0; z < 8; z++) {
+                if (allebuttons[z].getAttribute('class') === null) {
+                    unentschieden = false
+                }
+            }
+            if(unentschieden === true )
+            {
+                alert("Unentschieden")
+            }
+            return unentschieden
         }
 
         function spielende() {
@@ -122,73 +108,72 @@
                     zeilenbruch.appendChild(td)
                 }
                 neueTabelle.appendChild(zeilenbruch)
+                current = 0;
             }
 
         }
 
         function gegenspieler() {
             // Sieg des Spielers vereiteln
-            if (kannKIGewinnen('spieler1') === false)
-            {
-                if (kannKIGewinnen('spieler0') === false)
-                {
+            if (kannKIGewinnen('spieler1') === false) {
+                if (kannKIGewinnen('spieler0') === false) {
                     zufaelligesFeld()
-                    unentschieden()
                 }
             }
         }
-            function kannKIGewinnen(spieler) {
-                var allebuttons = document.querySelectorAll('button')
-                var s1 = "spieler" + 0
-                var s2 = "spieler" + 1
-                for (var x = 0; x < 8; x++) {
-                    if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
-                        allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
-                        allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
-                        // KI kann gewinnen
-                        allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
-                        allebuttons[gewinnBedingungen[x][2]].innerText = "O";
-                        current = 1 - current
-                        allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
-                        return true;
-                    } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
-                        allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
-                        allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
-                        // KI kann gewinnen
-                        allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
-                        allebuttons[gewinnBedingungen[x][1]].innerText = "O";
-                        current = 1 - current
-                        allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
-                        return true;
-                    } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
-                        allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
-                        allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
-                        // KI kann gewinnen
-                        allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
-                        allebuttons[gewinnBedingungen[x][0]].innerText = "O";
-                        current = 1 - current
-                        allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
-                        return true;
-                    }
-                }
-                return false;
-            }
 
-            function zufaelligesFeld() {
-                var allebuttons = document.querySelectorAll('button')
-                var s1 = "spieler" + 0
-                var s2 = "spieler" + 1
-                var zufaelligeZahl = Math.floor(Math.random() * 8)
-                if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 || allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
-                     zufaelligesFeld()
-                }
-                 else {
-                    allebuttons[zufaelligeZahl].setAttribute("class", "spieler1")
-                    allebuttons[zufaelligeZahl].innerText = "O";
+        function kannKIGewinnen(spieler) {
+            var allebuttons = document.querySelectorAll('button')
+            var s1 = "spieler" + 0
+            var s2 = "spieler" + 1
+            for (var x = 0; x < 8; x++) {
+                if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][2]].innerText = "O";
                     current = 1 - current
-                    allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+                    allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
+                    return true;
+                } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][1]].innerText = "O";
+                    current = 1 - current
+                    allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
+                    return true;
+                } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
+                    allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
+                    allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
+                    // KI kann gewinnen
+                    allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
+                    allebuttons[gewinnBedingungen[x][0]].innerText = "O";
+                    current = 1 - current
+                    allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
+                    return true;
                 }
             }
+            return false;
+        }
+
+        function zufaelligesFeld() {
+
+            var allebuttons = document.querySelectorAll('button')
+            var s1 = "spieler" + 0
+            var s2 = "spieler" + 1
+            var zufaelligeZahl = Math.floor(Math.random() * 8)
+            if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 || allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
+                zufaelligesFeld()
+            } else {
+                allebuttons[zufaelligeZahl].setAttribute("class", "spieler1")
+                allebuttons[zufaelligeZahl].innerText = "O";
+                current = 1 - current
+                allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
+            }
+        }
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
