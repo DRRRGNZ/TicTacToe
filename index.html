@@ -40,7 +40,7 @@
 
             var cAs = "spieler" + current
 
-            for (k = 0; k < 8; k++) {
+            for (var k = 0; k < 8; k++) {
 
                 if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === cAs
                     && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === cAs
@@ -74,7 +74,7 @@
                 for (i = 0; i < 3; i++) {
                     var button = document.createElement('button')
                     button.addEventListener('click', () => {
-                        buttongeklickt(button);
+                        buttongeklickt();
                     })
                     var td = document.createElement('td')
                     td.appendChild(button)
@@ -83,7 +83,6 @@
                 tabelle.appendChild(zeilenbruch)
             }
         }
-
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
@@ -96,9 +95,42 @@
     <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
     <p> Es wird immer nach einander gezogen!</p>
 </div>
-<div class="spielfeld">
+    <table class="spielfeld">
+        <tr>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+            <td>
+                <button type="button" onclick="buttongeklickt(this)"></button>
+            </td>
+        </tr>
+    </table>
 
-</div>
 <table class="spielfeld">
 
 </table>
@@ -106,38 +138,3 @@
 </body>
 </head>
 </html>
-<table class="spielfeld">
-    <tr>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-        <td>
-            <button type="button" onclick="buttongeklickt(this)"></button>
-        </td>
-    </tr>
-</table>
