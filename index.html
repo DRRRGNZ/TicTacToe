@@ -56,7 +56,6 @@
                     spielende();
                     return true;
                 }
-
             }
             return unentschieden()
         }
@@ -94,8 +93,13 @@
             alert("Spieler " + current + " gewinnt!")
         }
 
+
         function Spielfeldgenerieren() {
-            document.querySelector('table')?.remove()
+
+            var dialog = document.getElementById("dialog")
+            dialog.show()
+
+        document.querySelector('table')?.remove()
             var neueTabelle = document.createElement('table')
             var div = document.getElementById('t1')
             div.appendChild(neueTabelle)
@@ -176,6 +180,7 @@
                 allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
             }
         }
+
     </script>
 <body>
 <h1> Tic Tac Toe </h1>
@@ -186,13 +191,21 @@
         gewonnen!</p>
     <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
     <p> Es wird immer nach einander gezogen!</p>
-    <h2>Spielweise wählen: <button type="button" onclick=" SpielegegenKI = true" >Gegen Ki Spielen</button>
-                           <button type="button" onclick=" SpielegegenKI = false">Gegen Spieler spielen </button> </h2>
 
 </div>
 <div id="t1" class="spielfeld">
 </div>
-<button type="button" onclick="Spielfeldgenerieren()">Nächste Runde</button>
+
+
+
+<dialog id="dialog"> <h2> Spielart auswählen </h2>
+    <button type='button' onClick=' SpielegegenKI = true; dialog.close()'> Gegen Ki Spielen</button>
+    <button type='button' onClick=" SpielegegenKI = false; dialog.close()">Gegen Spieler spielen</button>
+</dialog>
+
+<button type="button" onclick="Spielfeldgenerieren();"> Nächste Runde </button>
+
 </body>
 </head>
 </html>
+
