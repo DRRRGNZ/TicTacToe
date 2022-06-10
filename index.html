@@ -97,7 +97,7 @@
         function Spielfeldgenerieren() {
 
             var dialog = document.getElementById("dialog")
-            dialog.show()
+            dialog.showModal()
 
         document.querySelector('table')?.remove()
             var neueTabelle = document.createElement('table')
@@ -195,8 +195,6 @@
 </div>
 <div id="t1" class="spielfeld">
 </div>
-
-
 
 <dialog id="dialog"> <h2> Spielart auswählen </h2>
     <button type='button' onClick=' SpielegegenKI = true; dialog.close()'> Gegen Ki Spielen</button>
