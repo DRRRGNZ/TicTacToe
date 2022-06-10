@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ge">
+<html lang="ge" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +7,26 @@
     <title> Tic-Tac-Toe.com </title>
     <script src="tictactoescript.js"></script>
 </head>
-<body>
-<h1> Tic Tac Toe </h1>
-<div class="Infos">
-    <h2> Regeln: </h2>
+<body class="hintergrund">
+<h1 class="Titel"> Tic Tac Toe </h1>
+    <span class="Regeln"> <h2> Regeln: </h2>
     <p> 2 Spieler werden benötigt um dieses Spiel zu spielen!</p>
     <p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder Horizontal) mit seiner Form belegt hat, hat
         gewonnen!</p>
     <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
     <p> Es wird immer nach einander gezogen!</p>
-</div>
+    </span>
+
 <div id="t1" class="spielfeld">
 </div>
-<dialog id="dialog"> <h2> Spielart auswählen </h2>
+<div class="Dialog">
+<dialog id="dialog"><h2> Spielart auswählen </h2>
     <button id="ki" type='button' onclick='spielmodusaussuchen(true)'> Gegen Ki Spielen</button>
     <button id="mensch" type='button' onclick="spielmodusaussuchen(false)">Gegen Spieler spielen</button>
 </dialog>
-<button type="button" onclick="Spielfeldgenerieren();"> Nächste Runde </button>
+</div>
+<div class="Runde">
+<button type='button' onclick="Spielfeldgenerieren()"> Nächste Runde </button>
+</div>
 </body>
 </html>
