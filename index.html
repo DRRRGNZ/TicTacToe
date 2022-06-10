@@ -28,23 +28,24 @@
             if (current === 0) {
                 button.setAttribute("class", "spieler0")
                 button.innerText = "X";
-
             } else {
                 button.setAttribute("class", "spieler1")
                 button.innerText = "O";
             }
             if (wergewinnt() !== true) {
-                gegenspieler()
-                wergewinnt()
+                if(SpielegegenKI === true)
+                {
+                    gegenspieler()
+                    wergewinnt()
+                }
             }
             current = 1 - current// 1
             button.setAttribute("disabled", "true") // 1
-
         }
 
         function wergewinnt() {
 
-            var allebuttons = document.querySelectorAll('button')
+            var allebuttons = document.querySelectorAll(' td > button')
 
             var cAs = "spieler" + current
 
@@ -60,9 +61,11 @@
             return unentschieden()
         }
 
+        var SpielegegenKI = true
+
         function unentschieden() {
 
-            var allebuttons = document.querySelectorAll("button")
+            var allebuttons = document.querySelectorAll(" td > button")
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
             var unentschieden = true
@@ -71,15 +74,14 @@
                     unentschieden = false
                 }
             }
-            if(unentschieden === true )
-            {
+            if (unentschieden === true) {
                 alert("Unentschieden")
             }
             return unentschieden
         }
 
         function spielende() {
-            var allebuttons = document.querySelectorAll("button")
+            var allebuttons = document.querySelectorAll("td > button")
 
             for (var i = 0; i < 9; i++) {
                 allebuttons[i].setAttribute('disabled', 'true');
@@ -123,7 +125,7 @@
         }
 
         function kannKIGewinnen(spieler) {
-            var allebuttons = document.querySelectorAll('button')
+            var allebuttons = document.querySelectorAll( 'td >button')
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
             for (var x = 0; x < 8; x++) {
@@ -161,7 +163,7 @@
 
         function zufaelligesFeld() {
 
-            var allebuttons = document.querySelectorAll('button')
+            var allebuttons = document.querySelectorAll(' td > button')
             var s1 = "spieler" + 0
             var s2 = "spieler" + 1
             var zufaelligeZahl = Math.floor(Math.random() * 8)
@@ -179,15 +181,16 @@
 <h1> Tic Tac Toe </h1>
 <div class="Infos">
     <h2> Regeln: </h2>
-
     <p> 2 Spieler werden benötigt um dieses Spiel zu spielen!</p>
     <p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder Horizontal) mit seiner Form belegt hat, hat
         gewonnen!</p>
     <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
     <p> Es wird immer nach einander gezogen!</p>
+    <h2>Spielweise wählen: <button type="button" onclick=" SpielegegenKI = true" >Gegen Ki Spielen</button>
+                           <button type="button" onclick=" SpielegegenKI = false">Gegen Spieler spielen </button> </h2>
+
 </div>
 <div id="t1" class="spielfeld">
-
 </div>
 <button type="button" onclick="Spielfeldgenerieren()">Nächste Runde</button>
 </body>
