@@ -1,4 +1,4 @@
-.hintergrund{
+.hintergrund {
     background-color: black;
 }
 
@@ -38,6 +38,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .Titel {
     color: aqua;
     margin-left: auto;
@@ -51,6 +52,7 @@
 }
 
 .Dialog {
-   text-align: center;
+    text-align: center;
 
 }
+

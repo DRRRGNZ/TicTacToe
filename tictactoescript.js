@@ -52,10 +52,7 @@ function wergewinnt() {
 var SpielegegenKI = true
 
 function unentschieden() {
-
     var allebuttons = document.querySelectorAll(" td > button")
-    var s1 = "spieler" + 0
-    var s2 = "spieler" + 1
     var unentschieden = true
     for (var z = 0; z < 8; z++) {
         if (allebuttons[z].getAttribute('class') === null) {
@@ -119,8 +116,6 @@ function gegenspieler() {
 
 function kannKIGewinnen(spieler) {
     var allebuttons = document.querySelectorAll('td >button')
-    var s1 = "spieler" + 0
-    var s2 = "spieler" + 1
     for (var x = 0; x < 8; x++) {
         if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
             allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
@@ -160,7 +155,8 @@ function zufaelligesFeld() {
     var s1 = "spieler" + 0
     var s2 = "spieler" + 1
     var zufaelligeZahl = Math.floor(Math.random() * 8)
-    if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 || allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
+    if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 ||
+        allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
         zufaelligesFeld()
     } else {
         allebuttons[zufaelligeZahl].setAttribute("class", "spieler1")
@@ -174,7 +170,5 @@ function spielmodusaussuchen(SpielgegenKI) {
     SpielegegenKI = SpielgegenKI
     dialog.close()
 }
-
-
 
 
