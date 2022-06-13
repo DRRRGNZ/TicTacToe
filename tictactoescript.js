@@ -192,7 +192,7 @@ function felderchecken(spieler0, spieler1) {
             }
 
             allebuttons[x].removeAttribute('class')
-            allebuttons[x].remove.innerText = "";
+            allebuttons[x].innerText = "";
         }
     }
     return besterZug;
@@ -257,7 +257,7 @@ function gewinner(spieler0, spieler1) {
 
 
                 allebuttons[x].removeAttribute('class')
-                allebuttons[x].remove.innerText = "";
+                allebuttons[x].innerText = "";
             }
 
         }
@@ -278,6 +278,9 @@ function unentschieden2() {
     }
 }
 
+
+
+
 //vielleicht anstelle, der ganzen setAttribut eine modifizierte buttongeklickt methode
 // verwenden. Damit könnte man dann auch das gewinner(true) oder gewinner(false)
 // zum Funktionieren bringen kann, da ich mir sicher bin, dass das aktuell nicht funktionieren wird.
@@ -286,3 +289,6 @@ function unentschieden2() {
 // spieler0 übergibt oder eben spieler1
 // Da zu kommt, dass auch die unentschieden2 Methode, mit hoher wahrscheinlichkeit bearbeitet werden muss
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
+// Problem ist, möglicherweise, dass zwar alle mögliche gesetzt, entfernt und auch gespeichert wird, aber das am Ende kein finales
+// Feld besetzt wird.
+// Bei wergewinnt statt cAs spieler 0 || spieler1, da das mit dem wechsel (current) vielleicht nicht funktioniert
