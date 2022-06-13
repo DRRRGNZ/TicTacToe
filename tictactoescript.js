@@ -198,11 +198,11 @@ function felderchecken(spieler0, spieler1) {
     return besterZug;
 }
 
-function gewinner(spieler0, spieler1) {
+function gewinner(aktuellerSpieler) {
     var allebuttons = document.querySelectorAll(' td > button')
 
-    spieler0 = "spieler0"
-    spieler1 = "spieler1"
+  var  spieler0 = "spieler0"
+  var  spieler1 = "spieler1"
 
     for (var k = 0; k < 8; k++) {
         if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === spieler0
@@ -217,7 +217,7 @@ function gewinner(spieler0, spieler1) {
         }
     }
     unentschieden2()
-    if (spieler1 === true) {
+    if (spieler1 === aktuellerSpieler) {
 
         var zugWertung = -1000 ;
 
