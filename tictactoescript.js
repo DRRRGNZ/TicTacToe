@@ -171,4 +171,58 @@ function spielmodusaussuchen(SpielgegenKI) {
     dialog.close()
 }
 
+function minimax()
+{
 
+}
+
+function felderchecken() {
+     var besteWertung;
+     var besterZug
+
+    var allebuttons = document.querySelectorAll('td >button')
+    for (var x = 0; x < 8; x++) {
+        if (allebuttons[x].getAttribute('class') === spieler0 || spieler1 &&
+            allebuttons[x].getAttribute('class') === spieler0 || spieler1 &&
+            allebuttons[x].getAttribute('class') === spieler0 || spieler1) {
+        }
+        else {
+            allebuttons[x].setAttribute('class', "spieler1")
+            allebuttons[x].innerText = "O";
+            gewinner()
+            allebuttons[x].remove('class', "spieler1")
+            allebuttons[x].remove.innerText = "O";
+        }
+    }
+}
+
+function gewinner()
+{
+    var allebuttons = document.querySelectorAll(' td > button')
+
+    for (var k = 0; k < 8; k++) {
+        if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === spieler0
+            && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === spieler0
+            && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === spieler0) {
+            return 10;
+        } else if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === spieler1
+            && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === spieler1
+            && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === spieler1) {
+            return -10;
+        }
+        unentschieden2()
+    }
+}
+
+function unentschieden2() {
+    var allebuttons = document.querySelectorAll(" td > button")
+    var unentschieden = true
+    for (var z = 0; z < 8; z++) {
+        if (allebuttons[z].getAttribute('class') === null) {
+            unentschieden = false
+        }
+    }
+    if (unentschieden === true) {
+        return 0;
+    }
+}
