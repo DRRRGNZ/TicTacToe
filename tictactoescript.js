@@ -183,7 +183,6 @@ function felderchecken(spieler0, spieler1) {
             allebuttons[x].setAttribute('class', "spieler1")
             allebuttons[x].innerText = "O";
 
-            gewinner()
 
             var zugWertung = gewinner(spieler1);
 
@@ -198,6 +197,7 @@ function felderchecken(spieler0, spieler1) {
     }
     allebuttons[besterZug].setAttribute('class', "spieler1")
     allebuttons[besterZug].innerText = "O";
+    allebuttons[besterZug].setAttribute("disabled", "true")
     current = 1
     return besterZug;
 }
@@ -221,68 +221,64 @@ function gewinner(aktuellerSpieler) {
             return 10;
         }
     }
-    unentschieden2()
-    if (spieler0 === aktuellerSpieler) {
+    if (unentschieden2() === true) {
+        return 0;
+    }
 
-        var zugWertung;
-
+    var zugWertung;
+    if (aktuellerSpieler === spieler0) {
         var kleinsteWertung;
 
-        for (var x = 0; x < 8; x++) {
+        for (var x = 0; x < 9; x++) {
             if (allebuttons[x].getAttribute('class') === null) {
 
-                allebuttons[x].setAttribute('class', "spieler1")
-                allebuttons[x].innerText = "O";
+                allebuttons[x].setAttribute('class', "spieler0")
+                allebuttons[x].innerText = "X";
 
-                gewinner(spieler0)
-                var zugWertung = gewinner(spieler0);
+                zugWertung = gewinner(spieler1) // 1 => -1    spieler0 => spieler1
 
                 if (kleinsteWertung === undefined || zugWertung < kleinsteWertung) {
                     kleinsteWertung = zugWertung;
                 }
                 allebuttons[x].removeAttribute('class')
                 allebuttons[x].innerText = "";
+
             }
         }
         return kleinsteWertung;
     } else {
-        var zugWertung;
         var besteWertung;
-        for (var x = 0; x < 8; x++) {
+        for (var x = 0; x < 9; x++) {
             if (allebuttons[x].getAttribute('class') === null) {
 
                 allebuttons[x].setAttribute('class', "spieler1")
                 allebuttons[x].innerText = "O";
 
-                gewinner(spieler1)
-                var zugWertung = gewinner(spieler1);
+                zugWertung = gewinner(spieler0);
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
-
                 }
                 allebuttons[x].removeAttribute('class')
                 allebuttons[x].innerText = "";
             }
         }
+
     }
     return besteWertung;
-
 }
 
 function unentschieden2() {
     var allebuttons = document.querySelectorAll(" td > button")
-    var unentschieden;
+    var unentschieden = true;
+
     for (var z = 0; z < 8; z++) {
         if (allebuttons[z].getAttribute('class') === null) {
             unentschieden = false
         }
     }
-    if (unentschieden === false) {
-        return 0;
-    }
+    return unentschieden;
 }
-
 
 //vielleicht anstelle, der ganzen setAttribut eine modifizierte buttongeklickt methode
 // verwenden. Damit könnte man dann auch das gewinner(true) oder gewinner(false)
@@ -295,3 +291,4 @@ function unentschieden2() {
 // Problem ist, möglicherweise, dass zwar alle mögliche gesetzt, entfernt und auch gespeichert wird, aber das am Ende kein finales
 // Feld besetzt wird, weil das besterZug = allebuttons[x] nicht ganz funktioniert, wie es soll.
 // Bei wergewinnt statt cAs spieler 0 || spieler1, da das mit dem wechsel (current) vielleicht nicht funktioniert ---> war nicht das Problem
+
