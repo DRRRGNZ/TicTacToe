@@ -235,6 +235,7 @@ function gewinner(aktuellerSpieler) {
                 allebuttons[x].innerText = "O";
 
                 gewinner(spieler0)
+                var zugWertung = gewinner(spieler0);
 
                 if (kleinsteWertung === undefined || zugWertung < kleinsteWertung) {
                     kleinsteWertung = zugWertung;
@@ -254,6 +255,7 @@ function gewinner(aktuellerSpieler) {
                 allebuttons[x].innerText = "O";
 
                 gewinner(spieler1)
+                var zugWertung = gewinner(spieler1);
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
@@ -265,6 +267,7 @@ function gewinner(aktuellerSpieler) {
         }
     }
     return besteWertung;
+
 }
 
 function unentschieden2() {
