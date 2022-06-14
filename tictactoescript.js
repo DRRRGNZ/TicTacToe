@@ -184,7 +184,7 @@ function felderchecken(spieler0, spieler1) {
             allebuttons[x].innerText = "O";
 
 
-            var zugWertung = gewinner(spieler1);
+            var zugWertung = gewinner(spieler1, 0);
 
             if (besteWertung === undefined || zugWertung > besteWertung) {
                 besteWertung = zugWertung
@@ -203,7 +203,7 @@ function felderchecken(spieler0, spieler1) {
 }
 
 
-function gewinner(aktuellerSpieler) {
+function gewinner(aktuellerSpieler, tiefe ) {
     var allebuttons = document.querySelectorAll(' td > button')
 
     var spieler0 = "spieler0"
@@ -213,12 +213,12 @@ function gewinner(aktuellerSpieler) {
         if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === spieler0
             && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === spieler0
             && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === spieler0) {
-            return -10;
+            return -10 + tiefe;
         }
         if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === spieler1
             && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === spieler1
             && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === spieler1) {
-            return 10;
+            return 10 - tiefe;
         }
     }
     if (unentschieden2() === true) {
@@ -235,7 +235,7 @@ function gewinner(aktuellerSpieler) {
                 allebuttons[x].setAttribute('class', "spieler0")
                 allebuttons[x].innerText = "X";
 
-                zugWertung = gewinner(spieler1) // 1 => -1    spieler0 => spieler1
+                zugWertung = gewinner(spieler1, tiefe +1) // 1 => -1    spieler0 => spieler1
 
                 if (kleinsteWertung === undefined || zugWertung < kleinsteWertung) {
                     kleinsteWertung = zugWertung;
@@ -254,7 +254,7 @@ function gewinner(aktuellerSpieler) {
                 allebuttons[x].setAttribute('class', "spieler1")
                 allebuttons[x].innerText = "O";
 
-                zugWertung = gewinner(spieler0);
+                zugWertung = gewinner(spieler0, tiefe + 1);
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
@@ -263,9 +263,8 @@ function gewinner(aktuellerSpieler) {
                 allebuttons[x].innerText = "";
             }
         }
-
+        return besteWertung;
     }
-    return besteWertung;
 }
 
 function unentschieden2() {
@@ -280,15 +279,16 @@ function unentschieden2() {
     return unentschieden;
 }
 
-//vielleicht anstelle, der ganzen setAttribut eine modifizierte buttongeklickt methode
-// verwenden. Damit könnte man dann auch das gewinner(true) oder gewinner(false)
-// zum Funktionieren bringen kann, da ich mir sicher bin, dass das aktuell nicht funktionieren wird.
-// man könnte das mögliche Problem, das durch gewinner(true) oder gewinner(false) entstehen könnte auch versuchen zu lösen, indem
-// man hier wieder mit current arbeitet, also gewinner einmal meinen Zug durch Current übergeben, indem man dadurch, der Funktion
-// spieler0 übergibt oder eben spieler1
-// Da zu kommt, dass auch die unentschieden2 Methode, mit hoher wahrscheinlichkeit bearbeitet werden muss
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
-// Problem ist, möglicherweise, dass zwar alle mögliche gesetzt, entfernt und auch gespeichert wird, aber das am Ende kein finales
-// Feld besetzt wird, weil das besterZug = allebuttons[x] nicht ganz funktioniert, wie es soll.
-// Bei wergewinnt statt cAs spieler 0 || spieler1, da das mit dem wechsel (current) vielleicht nicht funktioniert ---> war nicht das Problem
+
+//Mit der Variable "tiefe" versuche ich zu bewirken, dass die KI immer die Sieg möglichkeit, mit den am wenigsten benötigten Zügen
+//Wie will ich da machen? Indem ich für jeden Zug, den die Ki simuliert "tiefe" um 1 zu nimmt und die KI, so dazu gebracht
+// wird, den optimalen Weg zu nutzen (optimal = möglichst wenig Züge)
+
+//Möglichkeit 1: Man könnte bei den gewinner Methoden Aufrufen jedesmal den Wert, der Variable "tiefe" um 1 erhöhen
+// bsp. gewinner(apieler0, tiefe = tiefe + 1)
+
+//Möglichkeit 2: Man könnte das "tiefe = tiefe +1" am versuchen am ende der Funktion/des Abschnittes einbringen.
+
+
 
