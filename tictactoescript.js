@@ -195,15 +195,18 @@ function felderchecken(spieler0, spieler1) {
             allebuttons[x].innerText = "";
         }
     }
-    allebuttons[besterZug].setAttribute('class', "spieler1")
-    allebuttons[besterZug].innerText = "O";
-    allebuttons[besterZug].setAttribute("disabled", "true")
-    current = 1
+    if (kannSpielergewinnen() === false)
+    {
+        allebuttons[besterZug].setAttribute('class', "spieler1")
+        allebuttons[besterZug].innerText = "O";
+        allebuttons[besterZug].setAttribute("disabled", "true")
+        current = 1
+    }
     return besterZug;
 }
 
 
-function gewinner(aktuellerSpieler, tiefe ) {
+function gewinner(aktuellerSpieler, tiefe) {
     var allebuttons = document.querySelectorAll(' td > button')
 
     var spieler0 = "spieler0"
@@ -235,7 +238,7 @@ function gewinner(aktuellerSpieler, tiefe ) {
                 allebuttons[x].setAttribute('class', "spieler0")
                 allebuttons[x].innerText = "X";
 
-                zugWertung = gewinner(spieler1, tiefe +1) // 1 => -1    spieler0 => spieler1
+                zugWertung = gewinner(spieler1, tiefe + 1) // 1 => -1    spieler0 => spieler1
 
                 if (kleinsteWertung === undefined || zugWertung < kleinsteWertung) {
                     kleinsteWertung = zugWertung;
@@ -279,16 +282,50 @@ function unentschieden2() {
     return unentschieden;
 }
 
+function kannSpielergewinnen() {
+    var allebuttons = document.querySelectorAll('td >button')
+    for (var x = 0; x < 8; x++) {
+        if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === "spieler0" &&
+            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === "spieler0" &&
+            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
+
+            allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
+            allebuttons[gewinnBedingungen[x][2]].innerText = "O";
+            allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
+            return true;
+        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === "spieler0" &&
+            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
+            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === "spieler0") {
+            // KI kann gewinnen
+            allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
+            allebuttons[gewinnBedingungen[x][1]].innerText = "O";
+            allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
+            return true;
+        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
+            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === "spieler0" &&
+            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === "spieler0") {
+            // KI kann gewinnen
+            allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
+            allebuttons[gewinnBedingungen[x][0]].innerText = "O";
+            allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
+            return true;
+        }
+    }
+    return false;
+}
+
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
 
 //Mit der Variable "tiefe" versuche ich zu bewirken, dass die KI immer die Sieg möglichkeit, mit den am wenigsten benötigten Zügen
-//Wie will ich da machen? Indem ich für jeden Zug, den die Ki simuliert "tiefe" um 1 zu nimmt und die KI, so dazu gebracht
-// wird, den optimalen Weg zu nutzen (optimal = möglichst wenig Züge)
 
-//Möglichkeit 1: Man könnte bei den gewinner Methoden Aufrufen jedesmal den Wert, der Variable "tiefe" um 1 erhöhen
-// bsp. gewinner(apieler0, tiefe = tiefe + 1)
+/*
+   Problem: Die KI geht nur auf ihren eigenen Sieg, dabei merkt sie aber nicht, dass ich im nächsten Zug schon gewinne
+   und verhindert dieses dann auch nicht.
+   Somit muss man der KI beibringen, dass sie auch darauf achten muss, ob ich (spieler0) im nächsten Zug gewinne, um dieses
+   dann zu vereiteln, statt auf ihren eigenen Sieg zu gehen
 
-//Möglichkeit 2: Man könnte das "tiefe = tiefe +1" am versuchen am ende der Funktion/des Abschnittes einbringen.
-
-
+   Lösung: 1. Eine abgewandelte Version von kannKIgewinnen, der Ki übergeben. Man könnte diese dann kannSpielergewinnen nennen:
+              Diese Methode prüft dann, ob der Spieler 2 von 3 Gewinnbedingungen erfüllt hat und sagt ihr dann, dass die Ki
+              auf das letzte Feld (das der Spieler zum Sieg braucht), ihr Symbol legen soll.
+ */
 
