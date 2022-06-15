@@ -60,3 +60,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.reload {
+    height: 20px;
+    width: 20px;
+}
+
+.buttonmitbild {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

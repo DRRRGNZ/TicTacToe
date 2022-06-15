@@ -16,9 +16,9 @@
 </div>
 <div class="Dialog">
     <dialog id="dialog"><h2> Spielart auswählen </h2>
-        <button id="ki" type='button' onclick='spielmodusaussuchen(true)'> Gegen Ki Spielen</button>
-        <button id="mensch" type='button' onclick="spielmodusaussuchen(false)">Gegen Spieler spielen</button>
-        <button type='button' onclick="Spielfeldgenerieren2 ;spielmodusaussuchen(true) ;KIgegenKI()" > Bot vs Bot</button>
+        <button id="ki" type='button' onclick='spielmodusaussuchen(Spielmodus.GegenKI)'> Gegen Ki Spielen</button>
+        <button id="mensch" type='button' onclick="spielmodusaussuchen(Spielmodus.GegenSpieler)">Gegen Spieler spielen</button>
+        <button type='button' onclick="botduell()"> Bot vs Bot</button>
     </dialog>
 </div>
 
@@ -36,6 +36,8 @@
 <div class="Runde">
     <button type='button' onclick="Spielfeldgenerieren()" > Nächste Runde</button>
 </div>
+<div class="buttonmitbild">
+    <button  type="button" onclick="spielwiederholen()"> <img class="reload" src="https://cdn-icons-png.flaticon.com/512/100/100487.png" alt="reload">  </button>
+</div>
 </body>
 </html>
-

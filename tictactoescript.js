@@ -13,6 +13,14 @@ var gewinnBedingungen = [
 
 var bestesFeld;
 
+const Spielmodus = {
+    GegenSpieler: 'GegenSpieler',
+    GegenKI: 'GegenKI',
+    KIGegenKI: 'KIGegenKI'
+};
+
+var spielmodus;
+
 document.addEventListener('DOMContentLoaded', Spielfeldgenerieren)
 
 function buttongeklickt(element) {   // 0
@@ -27,32 +35,21 @@ function buttongeklickt(element) {   // 0
     }
     if (wergewinnt() !== true && SpielegegenKI === true) {
 
-        felderchecken()
+        minimax()
         wergewinnt()
     }
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
 }
 
-function KIgegenKI() {
-    for (var h = 0; h < 1;) {
-        if (current === 0) {
-            gegenspieler()
-        }
-
-        const myTimeout = setTimeout(minimax, 3000)
-        minimax();
-    }
-}
-
-function minimax() {
-    if (wergewinnt2() !== true && SpielegegenKI === true) {
-
-        felderchecken()
+async function KIgegenKI() {
+    if(wergewinnt() === false) {
+        setTimeout(gegenspieler, 100)
         wergewinnt()
+        setTimeout(minimax , 1000)
+        setTimeout(KIgegenKI, 1000)
     }
 }
-
 
 function wergewinnt() {
 
@@ -95,22 +92,6 @@ function spielende() {
     }
 
     Gewinneranzeige();
-}
-
-function wergewinnt2() {
-
-    var allebuttons = document.querySelectorAll(' td > button')
-
-    var cAs = "spieler" + current
-
-    for (var k = 0; k < 8; k++) {
-        if (allebuttons[gewinnBedingungen[k][0]].getAttribute('class') === cAs
-            && allebuttons[gewinnBedingungen[k][1]].getAttribute('class') === cAs
-            && allebuttons[gewinnBedingungen[k][2]].getAttribute('class') === cAs) {
-            return true;
-        }
-    }
-    return unentschieden()
 }
 
 
@@ -176,6 +157,14 @@ function gegenspieler() {
     }
 }
 
+function botduell()
+{
+    Spielfeldgenerieren2 ;
+    spielmodusaussuchen(Spielmodus.KIGegenKI) ;
+    KIgegenKI()
+}
+
+
 function kannKIGewinnen(spieler) {
     var allebuttons = document.querySelectorAll('td >button')
     for (var x = 0; x < 8; x++) {
@@ -228,12 +217,19 @@ function zufaelligesFeld() {
     }
 }
 
-function spielmodusaussuchen(SpielgegenKI) {
-    SpielegegenKI = SpielgegenKI
+function spielmodusaussuchen(modus) {
+    spielmodus = modus
     dialog.close()
 }
 
-function felderchecken() {
+function spielwiederholen()
+{
+    Spielfeldgenerieren2()
+    if(spielmodus === Spielmodus.KIGegenKI)
+    {botduell()}
+}
+
+function minimax() {
 
     var spieler0 = "spieler0";
     var spieler1 = "spieler1";
@@ -337,3 +333,4 @@ function unentschieden2() {
 /*
 
 */
+
