@@ -20,16 +20,17 @@ function buttongeklickt(element) {   // 0
     if (current === 0) {
         button.setAttribute("class", "spieler0")
         button.innerText = "X";
-        wergewinnt();
+
     } else {
         button.setAttribute("class", "spieler1")
         button.innerText = "O";
-        wergewinnt();
+
     }
+
     if (SpielegegenKI === true) {
-            felderchecken()
-            wergewinnt()
+        felderchecken()
     }
+    wergewinnt()
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
 }
@@ -144,7 +145,7 @@ function gewinner(aktuellerSpieler, tiefe) {
             return 10 - tiefe;
         }
     }
-    if (unentschieden2() === true || tiefe === 10000000000000) {
+    if (unentschieden2() === true || tiefe === 10000) {
         return 0;
     }
     var zugWertung;
@@ -177,7 +178,7 @@ function gewinner(aktuellerSpieler, tiefe) {
                 allebuttons[x].setAttribute('class', "spieler1")
                 allebuttons[x].innerText = "O";
 
-                zugWertung = gewinner(spieler0, tiefe + 1);
+                zugWertung = gewinner(spieler0,tiefe +1);
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
@@ -211,10 +212,6 @@ function unentschieden2() {
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
 
 //Mit der Variable "tiefe" versuche ich zu bewirken, dass die KI immer die Sieg möglichkeit, mit den am wenigsten benötigten Zügen
-
-/*
-   Statement expected Bedeutung herausfinden
- */
 
 /*
 
