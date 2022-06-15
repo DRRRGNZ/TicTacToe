@@ -27,7 +27,7 @@ function buttongeklickt(element) {   // 0
         wergewinnt()
     }
     current = 1 - current// 1
-    button.setAttribute("disabled", "true") // 1
+    button.setAttribute("disabled", "true")
 }
 
 function wergewinnt() {
@@ -195,15 +195,13 @@ function felderchecken(spieler0, spieler1) {
             allebuttons[x].innerText = "";
         }
     }
-    if (kannSpielergewinnen() === false)
-    {
-        allebuttons[besterZug].setAttribute('class', "spieler1")
-        allebuttons[besterZug].innerText = "O";
-        allebuttons[besterZug].setAttribute("disabled", "true")
-        current = 1
-    }
+    allebuttons[besterZug].setAttribute('class', "spieler1")
+    allebuttons[besterZug].innerText = "O";
+    allebuttons[besterZug].setAttribute("disabled", "true")
+    current = 1
     return besterZug;
 }
+
 
 
 function gewinner(aktuellerSpieler, tiefe) {
