@@ -20,16 +20,15 @@ function buttongeklickt(element) {   // 0
     if (current === 0) {
         button.setAttribute("class", "spieler0")
         button.innerText = "X";
+        wergewinnt();
     } else {
         button.setAttribute("class", "spieler1")
         button.innerText = "O";
+        wergewinnt();
     }
-    wergewinnt();
     if (SpielegegenKI === true) {
-        if (wergewinnt() !== true) {
             felderchecken()
             wergewinnt()
-        }
     }
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
@@ -145,7 +144,7 @@ function gewinner(aktuellerSpieler, tiefe) {
             return 10 - tiefe;
         }
     }
-    if (unentschieden2() === true || tiefe === 4) {
+    if (unentschieden2() === true || tiefe === 10000000000000) {
         return 0;
     }
     var zugWertung;
