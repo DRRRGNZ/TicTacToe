@@ -26,11 +26,11 @@ function buttongeklickt(element) {   // 0
         button.innerText = "O";
 
     }
+    if (wergewinnt() !== true && SpielegegenKI === true) {
 
-    if (SpielegegenKI === true) {
         felderchecken()
+        wergewinnt()
     }
-    wergewinnt()
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
 }
@@ -178,7 +178,7 @@ function gewinner(aktuellerSpieler, tiefe) {
                 allebuttons[x].setAttribute('class', "spieler1")
                 allebuttons[x].innerText = "O";
 
-                zugWertung = gewinner(spieler0,tiefe +1);
+                zugWertung = gewinner(spieler0, tiefe + 1);
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
