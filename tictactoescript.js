@@ -11,6 +11,8 @@ var gewinnBedingungen = [
     [2, 4, 6]
 ]
 
+var bestesFeld;
+
 document.addEventListener('DOMContentLoaded', Spielfeldgenerieren)
 
 function buttongeklickt(element) {   // 0
@@ -169,39 +171,18 @@ function spielmodusaussuchen(SpielgegenKI) {
     dialog.close()
 }
 
-function felderchecken(spieler0, spieler1) {
-    var besteWertung;
-    var besterZug;
+function felderchecken() {
 
-    spieler0 = "spieler0";
-    spieler1 = "spieler1";
+    var spieler0 = "spieler0";
+    var spieler1 = "spieler1";
 
     var allebuttons = document.querySelectorAll('td >button')
-    for (var x = 0; x < 9; x++) {
-        if (allebuttons[x].getAttribute('class') == null) {
-
-            allebuttons[x].setAttribute('class', "spieler1")
-            allebuttons[x].innerText = "O";
-
-
-            var zugWertung = gewinner(spieler1, 0);
-
-            if (besteWertung === undefined || zugWertung > besteWertung) {
-                besteWertung = zugWertung
-                besterZug = x;
-            }
-
-            allebuttons[x].removeAttribute('class')
-            allebuttons[x].innerText = "";
-        }
-    }
-    allebuttons[besterZug].setAttribute('class', "spieler1")
-    allebuttons[besterZug].innerText = "O";
-    allebuttons[besterZug].setAttribute("disabled", "true")
+    bestesFeld = gewinner(spieler1, 0)
+    allebuttons[bestesFeld].setAttribute('class', "spieler1")
+    allebuttons[bestesFeld].innerText = "O";
+    allebuttons[bestesFeld].setAttribute("disabled", "true")
     current = 1
-    return besterZug;
 }
-
 
 
 function gewinner(aktuellerSpieler, tiefe) {
@@ -222,10 +203,9 @@ function gewinner(aktuellerSpieler, tiefe) {
             return 10 - tiefe;
         }
     }
-    if (unentschieden2() === true) {
+    if (unentschieden2() === true || tiefe === 4) {
         return 0;
     }
-
     var zugWertung;
     if (aktuellerSpieler === spieler0) {
         var kleinsteWertung;
@@ -249,6 +229,7 @@ function gewinner(aktuellerSpieler, tiefe) {
         return kleinsteWertung;
     } else {
         var besteWertung;
+        var besterZug;
         for (var x = 0; x < 9; x++) {
             if (allebuttons[x].getAttribute('class') === null) {
 
@@ -259,12 +240,18 @@ function gewinner(aktuellerSpieler, tiefe) {
 
                 if (besteWertung === undefined || zugWertung > besteWertung) {
                     besteWertung = zugWertung
+                    besterZug = x;
                 }
                 allebuttons[x].removeAttribute('class')
                 allebuttons[x].innerText = "";
             }
         }
-        return besteWertung;
+
+        if (tiefe === 0) {
+            return besterZug
+        } else {
+            return besteWertung;
+        }
     }
 }
 
@@ -311,6 +298,8 @@ function kannSpielergewinnen() {
     }
     return false;
 }
+
+
 
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
 
