@@ -9,8 +9,9 @@
 </head>
 <body class="hintergrund">
 <h1 class="Titel"> Tic Tac Toe </h1>
-<button type="button" onclick="Regelbox.open"
-
+<div class="Regelbox">
+    <button type="button" onclick="Regelbox.showModal()"> Regeln</button>
+</div>
 <div id="t1" class="spielfeld">
 </div>
 <div class="Dialog">
@@ -21,14 +22,14 @@
 </div>
 
 
-
-<div class="Regelbox">
+<div class="Regeln">
     <dialog id="Regelbox"><h2> Spielregeln: </h2>
         <p> 2 Spieler werden benötigt, um dieses Spiel zu spielen!</p>
         <p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder horizontal) mit seiner Form belegt hat, hat
             gewonnen!</p>
         <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
         <p> Es wird immer nach einander gezogen!</p>
+        <button type='button' onclick="Regelbox.close()"> X</button>
     </dialog>
 </div>
 
