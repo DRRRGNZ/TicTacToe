@@ -24,9 +24,12 @@ function buttongeklickt(element) {   // 0
         button.setAttribute("class", "spieler1")
         button.innerText = "O";
     }
-    if (wergewinnt() !== true) {
-        felderchecken()
-        wergewinnt()
+    wergewinnt();
+    if (SpielegegenKI === true) {
+        if (wergewinnt() !== true) {
+            felderchecken()
+            wergewinnt()
+        }
     }
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
@@ -103,67 +106,6 @@ function Spielfeldgenerieren() {
         current = 0;
     }
 
-}
-
-function gegenspieler() {
-    if (kannKIGewinnen("spieler0") === false)
-        if (kannKIGewinnen("spieler1") === false) {
-            {
-                zufaelligesFeld()
-            }
-        }
-}
-
-function kannKIGewinnen(spieler) {
-    var allebuttons = document.querySelectorAll('td >button')
-    for (var x = 0; x < 8; x++) {
-        if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
-            // KI kann gewinnen
-            allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][2]].innerText = "O";
-            current = 1 - current
-            allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
-            return true;
-        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === spieler &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
-            // KI kann gewinnen
-            allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][1]].innerText = "O";
-            current = 1 - current
-            allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
-            return true;
-        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === spieler &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === spieler) {
-            // KI kann gewinnen
-            allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][0]].innerText = "O";
-            current = 1 - current
-            allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
-            return true;
-        }
-    }
-    return false;
-}
-
-function zufaelligesFeld() {
-
-    var allebuttons = document.querySelectorAll(' td > button')
-    var s1 = "spieler" + 0
-    var s2 = "spieler" + 1
-    var zufaelligeZahl = Math.floor(Math.random() * 8)
-    if (allebuttons[zufaelligeZahl].getAttribute('class') === s1 ||
-        allebuttons[zufaelligeZahl].getAttribute('class') === s2) {
-        zufaelligesFeld()
-    } else {
-        allebuttons[zufaelligeZahl].setAttribute("class", "spieler1")
-        allebuttons[zufaelligeZahl].innerText = "O";
-        current = 1 - current
-        allebuttons[zufaelligeZahl].setAttribute("disabled", "true")
-    }
 }
 
 function spielmodusaussuchen(SpielgegenKI) {
@@ -267,52 +209,14 @@ function unentschieden2() {
     return unentschieden;
 }
 
-function kannSpielergewinnen() {
-    var allebuttons = document.querySelectorAll('td >button')
-    for (var x = 0; x < 8; x++) {
-        if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === "spieler0" &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === "spieler0" &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === null) {
-
-            allebuttons[gewinnBedingungen[x][2]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][2]].innerText = "O";
-            allebuttons[gewinnBedingungen[x][2]].setAttribute("disabled", "true")
-            return true;
-        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === "spieler0" &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === null &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === "spieler0") {
-            // KI kann gewinnen
-            allebuttons[gewinnBedingungen[x][1]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][1]].innerText = "O";
-            allebuttons[gewinnBedingungen[x][1]].setAttribute("disabled", "true")
-            return true;
-        } else if (allebuttons[gewinnBedingungen[x][0]].getAttribute('class') === null &&
-            allebuttons[gewinnBedingungen[x][1]].getAttribute('class') === "spieler0" &&
-            allebuttons[gewinnBedingungen[x][2]].getAttribute('class') === "spieler0") {
-            // KI kann gewinnen
-            allebuttons[gewinnBedingungen[x][0]].setAttribute("class", "spieler1")
-            allebuttons[gewinnBedingungen[x][0]].innerText = "O";
-            allebuttons[gewinnBedingungen[x][0]].setAttribute("disabled", "true")
-            return true;
-        }
-    }
-    return false;
-}
-
-
-
 //Ausdruck for(var feld of allebuttons) vielleicht benutzen, um alle, diesen langen if Bedingungen auszutauschen
 
 //Mit der Variable "tiefe" versuche ich zu bewirken, dass die KI immer die Sieg möglichkeit, mit den am wenigsten benötigten Zügen
 
 /*
-   Problem: Die KI geht nur auf ihren eigenen Sieg, dabei merkt sie aber nicht, dass ich im nächsten Zug schon gewinne
-   und verhindert dieses dann auch nicht.
-   Somit muss man der KI beibringen, dass sie auch darauf achten muss, ob ich (spieler0) im nächsten Zug gewinne, um dieses
-   dann zu vereiteln, statt auf ihren eigenen Sieg zu gehen
-
-   Lösung: 1. Eine abgewandelte Version von kannKIgewinnen, der Ki übergeben. Man könnte diese dann kannSpielergewinnen nennen:
-              Diese Methode prüft dann, ob der Spieler 2 von 3 Gewinnbedingungen erfüllt hat und sagt ihr dann, dass die Ki
-              auf das letzte Feld (das der Spieler zum Sieg braucht), ihr Symbol legen soll.
+   Statement expected Bedeutung herausfinden
  */
 
+/*
+
+ */
