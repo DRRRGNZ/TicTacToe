@@ -25,28 +25,26 @@ document.addEventListener('DOMContentLoaded', Spielfeldgenerieren)
 
 function buttongeklickt(element) {   // 0
     var button = element.target;
-    if (current === 0) {
-        gegenspieler()
-
-    } else {
+    if (current === 0 && spielmodus !== Spielmodus.KIGegenKI) {
+        button.setAttribute("class", "spieler0")
+        button.innerText = "X";
+    } else if (current === 1 && spielmodus !== Spielmodus.KIGegenKI) {
         button.setAttribute("class", "spieler1")
         button.innerText = "O";
-
     }
-    if (wergewinnt() !== true && SpielegegenKI === true) {
-
+    if (wergewinnt() !== true && spielmodus === Spielmodus.GegenKI) {
         minimax()
-        wergewinnt()
+        wergewinnt();
     }
     current = 1 - current// 1
     button.setAttribute("disabled", "true")
 }
 
 async function KIgegenKI() {
-    if(wergewinnt() === false) {
-        setTimeout(gegenspieler, 100)
+    if (wergewinnt() === false) {
+        setTimeout(gegenspieler, 1000)
         wergewinnt()
-        setTimeout(minimax , 1000)
+        setTimeout(minimax, 1000)
         setTimeout(KIgegenKI, 1000)
     }
 }
@@ -157,10 +155,9 @@ function gegenspieler() {
     }
 }
 
-function botduell()
-{
-    Spielfeldgenerieren2 ;
-    spielmodusaussuchen(Spielmodus.KIGegenKI) ;
+function botduell() {
+    Spielfeldgenerieren2;
+    spielmodusaussuchen(Spielmodus.KIGegenKI);
     KIgegenKI()
 }
 
@@ -220,13 +217,14 @@ function zufaelligesFeld() {
 function spielmodusaussuchen(modus) {
     spielmodus = modus
     dialog.close()
+    return modus;
 }
 
-function spielwiederholen()
-{
+function spielwiederholen() {
     Spielfeldgenerieren2()
-    if(spielmodus === Spielmodus.KIGegenKI)
-    {botduell()}
+    if (spielmodus === Spielmodus.KIGegenKI) {
+        botduell()
+    }
 }
 
 function minimax() {
@@ -241,7 +239,6 @@ function minimax() {
     allebuttons[bestesFeld].setAttribute("disabled", "true")
     current = 1
 }
-
 
 function gewinner(aktuellerSpieler, tiefe) {
     var allebuttons = document.querySelectorAll(' td > button')
