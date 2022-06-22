@@ -15,9 +15,9 @@
 <div id="t1" class="spielfeld">
 </div>
 <div class="Dialog">
-    <dialog id="dialog"><h2> Spielart auswählen </h2>
-        <button id="ki" type='button' onclick='spielmodusaussuchen(Spielmodus.GegenKI)'> Gegen Ki Spielen</button>
-        <button id="mensch" type='button' onclick="spielmodusaussuchen(Spielmodus.GegenSpieler)">Gegen Spieler spielen</button>
+    <dialog id="dialog"><h2> Spielmodus auswählen </h2>
+        <button id="ki" type='button' onclick='spielmodusaussuchen(Spielmodus.GegenKI)'> Gegen Ki Spielen</button> <br> <br>
+        <button id="mensch" type='button' onclick="spielmodusaussuchen(Spielmodus.GegenSpieler)">Gegen Spieler spielen</button> <br> <br>
         <button type='button' onclick="botduell()"> Bot vs Bot</button>
     </dialog>
 </div>
@@ -27,14 +27,14 @@
         <p> 2 Spieler werden benötigt, um dieses Spiel zu spielen!</p>
         <p> Der Spieler, der 3 Felder in einer Reihe (diagonal oder horizontal) mit seiner Form belegt hat, hat
             gewonnen!</p>
-        <p> Belegte Felder können nicht mit eineer anderen Form belegt werden!</p>
+        <p> Belegte Felder können nicht mit einer anderen Form belegt werden!</p>
         <p> Es wird immer nach einander gezogen!</p>
         <button type='button' onclick="Regelbox.close()"> X</button>
     </dialog>
 </div>
 
 <div class="Runde">
-    <button type='button' onclick="Spielfeldgenerieren()" > Nächste Runde</button>
+    <button type='button' onclick="Spielfeldgenerieren()" > Spielmodus auswählen</button>
 </div>
 <div class="buttonmitbild">
     <button  type="button" onclick="spielwiederholen()"> <img class="reload" src="https://cdn-icons-png.flaticon.com/512/100/100487.png" alt="reload">  </button>
